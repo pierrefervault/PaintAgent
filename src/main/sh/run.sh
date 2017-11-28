@@ -9,4 +9,4 @@ else
 fi
 
 mvn -f ../../../pom.xml clean install
-appletviewer -J-Djava.security.policy=../resources/policy.txt -J-XX:+UnlockCommercialFeatures -J-XX:+FlightRecorder "$FILE"
+appletviewer -J-Djava.security.policy=../resources/policy.txt "$FILE"
