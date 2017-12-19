@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"fr.polytechtours.javaperformance.tp2.MyBenchmark.test_atomicInteger","thrpt",1,2,"177351552,024017",NaN,"ops/s"
-"fr.polytechtours.javaperformance.tp2.MyBenchmark.test_integer","thrpt",1,2,"367094904,996252",NaN,"ops/s"
