@@ -36,13 +36,13 @@ public class CFourmi {
 
   /*************************************************************************************************
   */
-  public CFourmi(Color pCouleurDeposee, Color pCouleurSuivie, float pProbaTD, float pProbaG, float pProbaD,
+  public CFourmi(int pCouleurDeposee, int pCouleurSuivie, float pProbaTD, float pProbaG, float pProbaD,
       float pProbaSuivre, CPainting pPainting, char pTypeDeplacement, float pInit_x, float pInit_y, int pInitDirection,
       int pTaille, float pSeuilLuminance, PaintingAnts pApplis) {
 
-    mCouleurDeposee = pCouleurDeposee;
-    mLuminanceCouleurSuivie = 0.2426f * pCouleurDeposee.getRed() + 0.7152f * pCouleurDeposee.getGreen()
-        + 0.0722f * pCouleurDeposee.getBlue();
+    mCouleurDeposee = new Color(pCouleurDeposee);
+    mLuminanceCouleurSuivie = 0.2426f * ((pCouleurDeposee>>16)&0x0ff) + 0.7152f * ((pCouleurDeposee>>8)&0x0ff)
+        + 0.0722f * ((pCouleurDeposee)&0x0ff);
     mPainting = pPainting;
     mApplis = pApplis;
 
@@ -112,7 +112,7 @@ public class CFourmi {
     if (mApplis.mBaseImage != null) {
       lCouleur = new Color(mApplis.mBaseImage.getRGB(i, j));
     } else {
-      lCouleur = new Color(mPainting.getCouleur(i, j).getRGB());
+      lCouleur = new Color(mPainting.getCouleur(i, j));
     }
     if (testCouleur(lCouleur)) {
       dir[0] = 1;
@@ -123,7 +123,7 @@ public class CFourmi {
     if (mApplis.mBaseImage != null) {
       lCouleur = new Color(mApplis.mBaseImage.getRGB(i, j));
     } else {
-      lCouleur = new Color(mPainting.getCouleur(i, j).getRGB());
+      lCouleur = new Color(mPainting.getCouleur(i, j));
     }
     if (testCouleur(lCouleur)) {
       dir[1] = 1;
@@ -133,7 +133,7 @@ public class CFourmi {
     if (mApplis.mBaseImage != null) {
       lCouleur = new Color(mApplis.mBaseImage.getRGB(i, j));
     } else {
-      lCouleur = new Color(mPainting.getCouleur(i, j).getRGB());
+      lCouleur = new Color(mPainting.getCouleur(i, j));
     }
     if (testCouleur(lCouleur)) {
       dir[2] = 1;
