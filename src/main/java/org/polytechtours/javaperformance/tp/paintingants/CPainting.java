@@ -69,7 +69,7 @@ public class CPainting extends Canvas implements MouseListener {
     mDimension = pDimension;
     setBounds(new Rectangle(0, 0, mDimension.width, mDimension.height));
 
-    this.setBackground(Color.decode(Integer.toString(mCouleurFond)));
+    this.setBackground(Color.decode(""+mCouleurFond));
 
     // initialisation de la matrice des couleurs
     mCouleurs = new int[mDimension.width][mDimension.height];
@@ -297,7 +297,7 @@ public class CPainting extends Canvas implements MouseListener {
     //synchronized (mMutexCouleurs) {
       for (i = 0; i < mDimension.width; ++i) {
         for (j = 0; j < mDimension.height; ++j) {
-          pGraphics.setColor(Color.decode(Integer.toString(mCouleurs[i][j])));
+          pGraphics.setColor(Color.decode(""+mCouleurs[i][j]));
           pGraphics.fillRect(i, j, 1, 1);
         }
       }
@@ -317,7 +317,7 @@ public class CPainting extends Canvas implements MouseListener {
 	    //synchronized (mMutexCouleurs) {
 	      if (!mSuspendu) {
 	        // on colorie la case sur laquelle se trouve la fourmi
-	        mGraphics.setColor(Color.decode(Integer.toString(c)));
+	        mGraphics.setColor(Color.decode(""+c));
 	        mGraphics.fillRect(x, y, 1, 1);
 	      }
 
