@@ -41,7 +41,6 @@ public class CPainting extends Canvas implements MouseListener {
   private Graphics mGraphics;
   // Objet ne servant que pour les bloc synchronized pour la manipulation du
   // tableau des couleurs
-  private Object mMutexCouleurs = new Object();
   // tableau des couleurs, il permert de conserver en memoire l'état de chaque
   // pixel du canvas, ce qui est necessaire au deplacemewt des fourmi
   // il sert aussi pour la fonction paint du Canvas
@@ -71,14 +70,7 @@ public class CPainting extends Canvas implements MouseListener {
 
     this.setBackground(Color.decode(""+mCouleurFond));
 
-    // initialisation de la matrice des couleurs
     mCouleurs = new int[mDimension.width][mDimension.height];
-	  
-    for (i = 0; i != mDimension.width; ++i) {
-	   for (j = 0; j != mDimension.height; ++j) {
-		   mCouleurs[i][j] = 65536 * ((mCouleurFond>>16)&0x0ff) + 256 * ((mCouleurFond>>8)&0x0ff) + ((mCouleurFond)&0x0ff);
-	   }
-	}
 
   }
 
@@ -121,18 +113,19 @@ public class CPainting extends Canvas implements MouseListener {
    * et initialise le tableau des couleurs avec la couleur blanche
    ******************************************************************************/
   public void init() {
+	
 	int i, j;
     mGraphics = getGraphics();
     //synchronized (mMutexCouleurs) {
-      mGraphics.clearRect(0, 0, mDimension.width, mDimension.height);
+	mGraphics.clearRect(0, 0, mDimension.width, mDimension.height);
 
-      // initialisation de la matrice des couleurs
+	// initialisation de la matrice des couleurs
 
-      for (i = 0; i != mDimension.width; ++i) {
-        for (j = 0; j != mDimension.height; ++j) {
-        	mCouleurs[i][j] = 65536 * ((mCouleurFond>>16)&0x0ff) + 256 * ((mCouleurFond>>8)&0x0ff) + ((mCouleurFond)&0x0ff);
-        }
-      }
+	for (i = 0; i != mDimension.width; ++i) {
+	for (j = 0; j != mDimension.height; ++j) {
+		mCouleurs[i][j] = 65536 * ((mCouleurFond>>16)&0x0ff) + 256 * ((mCouleurFond>>8)&0x0ff) + ((mCouleurFond)&0x0ff);
+	}
+	}
     //}
 
     // initialisation de la matrice de convolution : lissage moyen sur 9

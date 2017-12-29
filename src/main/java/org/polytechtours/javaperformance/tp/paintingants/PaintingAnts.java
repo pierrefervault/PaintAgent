@@ -30,7 +30,6 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
 
   private Dimension mDimension;
   private long mCompteur = 0;
-  private Object mMutexCompteur = new Object();
   private boolean mPause = false;
 
   public BufferedImage mBaseImage;
