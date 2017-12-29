@@ -48,7 +48,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
    */
   public void compteur() {
     //synchronized (mMutexCompteur) {
-      mCompteur++;
+      ++mCompteur;
     //}
   }
 
@@ -100,7 +100,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
   }
 
   public /*synchronized*/ void IncrementFpsCounter() {
-    fpsCounter++;
+    ++fpsCounter;
   }
 
   /****************************************************************************/
@@ -378,7 +378,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
         lFourmi = new CFourmi(lCouleurDeposee, lCouleurSuivie, lProbaTD, lProbaG, lProbaD, lProbaSuivre, mPainting,
             lTypeDeplacement, lInit_x, lInit_y, lInitDirection, lTaille, lSeuilLuminance, this);
         mColonie.addElement(lFourmi);
-        lNbFourmis++;
+        ++lNbFourmis;
       }
     } else // initialisation aléatoire des fourmis
     {
@@ -388,7 +388,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
       int lColor;
 
       // initialisation aléatoire de la couleur de chaque fourmi
-      for (i = 0; i < lNbFourmis; i++) {
+      for (i = 0; i < lNbFourmis; ++i) {
         R = (int) (Math.random() * 256);
         G = (int) (Math.random() * 256);
         B = (int) (Math.random() * 256);
@@ -396,7 +396,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
       }
 
       // construction des fourmis
-      for (i = 0; i < lNbFourmis; i++) {
+      for (i = 0; i < lNbFourmis; ++i) {
         // la couleur suivie est la couleur d'une autre fourmi
         lColor = (int) (Math.random() * lNbFourmis);
         if (i == lColor) {
@@ -461,7 +461,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
     Thread currentThread = Thread.currentThread();
 
     /*
-     * for ( i=0 ; i<mColonie.size() ; i++ ) {
+     * for ( i=0 ; i<mColonie.size() ; ++i) {
      * ((CFourmi)mColonie.elementAt(i)).start(); }
      */
 
@@ -477,7 +477,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
 
         //synchronized (mMutexCompteur) {
           mCompteur %= 10000;
-          for (i = 0; i < mCompteur / 1000; i++) {
+          for (i = 0; i < mCompteur / 1000; ++i) {
             lMessage += ".";
           }
         //}

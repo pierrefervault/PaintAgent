@@ -99,7 +99,7 @@ public class CFourmi {
     int i, j;
     int lCouleur;
 
-    mNbDeplacements++;
+    ++mNbDeplacements;
 
     dir[0] = 0;
     dir[1] = 0;

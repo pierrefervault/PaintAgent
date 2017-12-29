@@ -49,8 +49,8 @@ public class CPainting extends Canvas implements MouseListener {
   private int[][] mCouleurs;
   // couleur du fond
   //private Color mCouleurFond = new Color(255, 255, 255);
-  private int mCouleurFond = 65536 * 255 + 256 * 255 + 255;
   // dimensions
+  private int mCouleurFond = 65536 * 255 + 256 * 255 + 255;
   private Dimension mDimension = new Dimension();
 
   private PaintingAnts mApplis;
@@ -121,7 +121,7 @@ public class CPainting extends Canvas implements MouseListener {
    * et initialise le tableau des couleurs avec la couleur blanche
    ******************************************************************************/
   public void init() {
-    int i, j;
+	int i, j;
     mGraphics = getGraphics();
     //synchronized (mMutexCouleurs) {
       mGraphics.clearRect(0, 0, mDimension.width, mDimension.height);
@@ -332,8 +332,8 @@ public class CPainting extends Canvas implements MouseListener {
 					for (j = 0; j <= tailleMax; ++j) {
 						R = G = B = 0f;
 						
-						for (k = 0; k <= tailleMax; k++) {
-							for (l = 0; l <= tailleMax; l++) {
+						for (k = 0; k <= tailleMax; ++k) {
+							for (l = 0; l <= tailleMax; ++l) {
 								m = (x + i + k - tailleMax + mDimension.width) % mDimension.width;
 								n = (y + j + l - tailleMax + mDimension.height) % mDimension.height;
 								if (pTaille == 1){
