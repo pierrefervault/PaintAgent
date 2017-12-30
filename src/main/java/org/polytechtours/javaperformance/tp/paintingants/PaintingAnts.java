@@ -1,7 +1,6 @@
 package org.polytechtours.javaperformance.tp.paintingants;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,6 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
 
   private Thread mApplis, mThreadColony;
 
-  private Dimension mDimension;
   private long mCompteur = 0;
   private boolean mPause = false;
 
@@ -114,11 +112,10 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
 
     // lecture des parametres de l'applet
 
-    mDimension = getSize();
-    mLargeur = mDimension.width;
-    mHauteur = mDimension.height;
+    mLargeur = getSize().width;
+    mHauteur = getSize().height;
 
-    mPainting = new CPainting(mDimension, this);
+    mPainting = new CPainting(mLargeur, mHauteur, this);
     add(mPainting);
 
     // lecture de l'image
@@ -133,8 +130,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
     if (mBaseImage != null) {
       mLargeur = mBaseImage.getWidth();
       mHauteur = mBaseImage.getHeight();
-      mDimension.setSize(mLargeur, mHauteur);
-      resize(mDimension);
+      resize(mLargeur, mHauteur);
     }
 
     readParameterFourmis();
