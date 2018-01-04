@@ -49,8 +49,9 @@ public class CPainting extends Canvas implements MouseListener {
   //private Color mCouleurFond = new Color(255, 255, 255);
   // dimensions
   private int mCouleurFond = 65536 * 255 + 256 * 255 + 255;
-	private int height;
-	private int width;
+  
+  private int height;
+  private int width;
 
   private PaintingAnts mApplis;
 

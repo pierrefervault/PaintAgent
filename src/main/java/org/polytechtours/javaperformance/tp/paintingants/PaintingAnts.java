@@ -35,6 +35,7 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
 
   /** Fourmis per second :) */
   private Long fpsCounter = 0L;
+  private long nbrCounter = 0;
   /** stocke la valeur du compteur lors du dernier timer */
   private Long lastFps = 0L;
 
@@ -543,7 +544,8 @@ public class PaintingAnts extends java.applet.Applet implements Runnable {
    * update Fourmis per second
    */
   private /*synchronized*/ void updateFPS() {
-    lastFps = fpsCounter;
-    fpsCounter = 0L;
+	++nbrCounter;
+	lastFps = fpsCounter/nbrCounter;
+    //fpsCounter = 0L;
   }
 }
