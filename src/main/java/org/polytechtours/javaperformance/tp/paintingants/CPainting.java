@@ -3,6 +3,7 @@ package org.polytechtours.javaperformance.tp.paintingants;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 // version : 2.0
 
@@ -50,6 +51,11 @@ public class CPainting extends Canvas implements MouseListener {
   // dimensions
   private int mCouleurFond = 65536 * 255 + 256 * 255 + 255;
   
+  //Utilisation BuffuredImage
+  //private BufferedImage bufferedImage;
+  
+  private int refresh = 0;
+  
   private int height;
   private int width;
 
@@ -67,7 +73,11 @@ public class CPainting extends Canvas implements MouseListener {
     mApplis = pApplis;
 
     height = h;
-		width = w;
+	width = w;
+	
+	//Utilisation BufferedImage
+	//bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	
     setBounds(new Rectangle(0, 0, width, height));
 
     this.setBackground(Color.decode(""+mCouleurFond));
@@ -280,15 +290,29 @@ public class CPainting extends Canvas implements MouseListener {
   @Override
   public void paint(Graphics pGraphics) {
     int i, j;
-
-    //synchronized (mMutexCouleurs) {
+    
+    //Utilisation normale
+	  //synchronized (mMutexCouleurs) {
+	    for (i = 0; i < width; ++i) {
+	      for (j = 0; j < height; ++j) {
+	        pGraphics.setColor(Color.decode(""+mCouleurs[i][j]));
+	        pGraphics.fillRect(i, j, 1, 1);
+	      }
+	    }
+	  //}
+	
+  
+    //Utilisation bufferedImage
+    /*
       for (i = 0; i < width; ++i) {
         for (j = 0; j < height; ++j) {
-          pGraphics.setColor(Color.decode(""+mCouleurs[i][j]));
-          pGraphics.fillRect(i, j, 1, 1);
+        	bufferedImage.setRGB(i, j, mCouleurs[i][j]);
         }
       }
-    //}
+	
+    pGraphics.drawImage(bufferedImage, 0, 0, null);
+	  */
+	  
   }
 
   /******************************************************************************
@@ -301,12 +325,21 @@ public class CPainting extends Canvas implements MouseListener {
 	    float R, G, B;
 	    Color lColor;
 
+	    //Utilisation normal
 	    //synchronized (mMutexCouleurs) {
+	      
 	      if (!mSuspendu) {
 	        // on colorie la case sur laquelle se trouve la fourmi
 	        mGraphics.setColor(Color.decode(""+c));
 	        mGraphics.fillRect(x, y, 1, 1);
 	      }
+	      
+	      //Utilisation bufferedImage
+	      /*
+	      if (!mSuspendu) {
+	        // on colorie la case sur laquelle se trouve la fourmi
+	    	bufferedImage.setRGB(x, y, mCouleurs[x][y]);
+	      }*/
 
 	      mCouleurs[x][y] = c;
 
@@ -342,16 +375,29 @@ public class CPainting extends Canvas implements MouseListener {
 								}
 							}
 						}
-						lColor = new Color((int) R, (int) G, (int) B);
-
-						mGraphics.setColor(lColor);
-
+						
 						m = (x + i - pTaille + width) % width;
 						n = (y + j - pTaille + height) % height;
-						mCouleurs[m][n] = lColor.getRGB();
+						mCouleurs[m][n] = 65536 * (int)R + 256 * (int)G + (int)B;
+						
+						//Utilisation normal
+						lColor = new Color(mCouleurs[m][n]);
+
+						mGraphics.setColor(lColor);
+						
 						if (!mSuspendu) {
 							mGraphics.fillRect(m, n, 1, 1);
 						}
+						
+						//Utilisation du bufferedImage
+						/*bufferedImage.setRGB(m, n, mCouleurs[m][n]);
+						if (refresh == 10000){
+							if (!mSuspendu) {
+								mGraphics.drawImage(bufferedImage, 0, 0, null);
+							}
+							refresh = 0;
+						}
+						++refresh;*/
 					}
 				}
 			}
